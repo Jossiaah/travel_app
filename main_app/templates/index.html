@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Login & Registration</title>
+</head>
+<body>
+  <div id="header">
+    <h1> <span>Welcome!</span> Let's travel!</h1>
+  </div>
+  <div id="wrapper">
+    <div id="login">
+      <form action="/login" method="POST">
+        {% csrf_token %}
+        <h1>Login</h1>
+        <div class="row mb-3">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" name="email" class="form-control" id="inputEmail3">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="password" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" name="password" class="form-control" id="inputPassword3">
+          </div>
+          {% if messages %}
+          <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+    </div>
+    <div id="registration">
+        <form class="row g-3" action="/register" method="POST">
+            {% csrf_token %}
+            <h1>Register</h1>
+            <div class="col-md-6">
+              <label for="first_name" class="form-label">First Name</label>
+              <input type="text" name="first_name" class="form-control" id="">
+            </div>
+            <div class="col-md-6">
+              <label for="last_name" class="form-label">Last Name</label>
+              <input type="text" name="last_name" class="form-control" id="">
+            </div>
+            <div class="col-md-6"> 
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="" placeholder="">
+            </div>
+            <div class="col-md-6">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="" placeholder="">
+            </div>
+            <div class="col-md-6">
+              <label for="confirm" class="form-label">Confirm PW</label>
+              <input type="password" name="confirm" class="form-control" id="inputCity">
+              {% if messages %}
+              <ul class="messages">    
+                {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+           
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </form>
+    </div>
+  </div>
+        <div id="footer">
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div id="container">
+        <div id="heading">
+            <div id="user_greeting">
+                <h1>Hello {{user_logged_in.first_name}} </h1>
+            </div>
+            <div id="logout">
+                <a href="/logout">Log Out</a>
+            </div>
+            <div id="create_trip">
+                <button class="create_trip_btn" onclick="location.href='trips/new'" role="link" data-href="trips/new">Create a new trip!</button>
+            </div>
+        </div>
+        <div id="table">
+            <p>Your trips:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Destination</td>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                        <td>Plan</td>
+                        <td>Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in user_logged_in.trips.all %}
+                    <tr>
+                        <td> <a href="/trips/{{trip.id}}">{{trip.destination}}</a></td>
+                        <td>{{trip.start_date}}</td>
+                        <td>{{trip.end_date}}</td>
+                        <td>{{trip.plan}}</td>
+                        <td>
+                            <a href="/trips/edit/{{trip.id}}">Edit</a> |
+                            <a href="/trips/delete/{{trip.id}}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+       
+</body>
+</html>
